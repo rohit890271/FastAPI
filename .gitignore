@@ -1,0 +1,14 @@
+# Ignore Python cache and compiled files
+__pycache__/
+*.pyc
+*.pyo
+
+# Ignore virtual environment folders
+venv/
+fastapi-env/Include/
+fastapi-env/Lib/
+fastapi-env/Scripts/
+
+# Ignore environment or config files
+.env
+*.sqlite3
