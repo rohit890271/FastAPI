@@ -12,3 +12,7 @@ fastapi-env/Scripts/
 # Ignore environment or config files
 .env
 *.sqlite3
+
+# Ignore entire virtual environment
+fastapi-env/
+venv/
