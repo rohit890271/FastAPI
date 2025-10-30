@@ -2,7 +2,7 @@ from sqlalchemy.orm import Session
 import models, schemas
 
 def create_product(db: Session, product: schemas.ProductCreate):
-    new_product = models.Product(name=product.name,price=product.price,description=product.description)
+    new_product = models.Product(name=product.name,price=product.price,description=product.description,owner_id=product.owner_id)
     db.add(new_product)
     db.commit()
     db.refresh(new_product)
@@ -22,6 +22,7 @@ def update_product(db: Session, product_id: int, product: schemas.ProductCreate)
     db_product.name=product.name
     db_product.price=product.price
     db_product.description=product.description
+    db_product.owner_id=product.owner_id
     db.commit()
     db.refresh(db_product)
     return db_product

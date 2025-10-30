@@ -11,7 +11,7 @@ def create_product(product: schemas.ProductCreate, db: Session = Depends(get_db)
 
 @router.get("/", response_model=list[schemas.ProductResponse])
 def get_product(db: Session = Depends(get_db)):
-    return crud_product.get_users(db)
+    return crud_product.get_products(db)
 
 @router.get("/{product_id}", response_model=schemas.ProductResponse)
 def get_product(product_id: int, db: Session = Depends(get_db)):
