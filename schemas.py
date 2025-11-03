@@ -11,12 +11,21 @@ class ProductResponse(BaseModel):  # simple nested version for user
 class UserCreate(BaseModel):
     name: str
     age: int
+    password:str
+
+class UserLogin(BaseModel):
+    name: str
+    password: str
 
 class UserResponse(UserCreate):
     id: int
     products: List[ProductResponse] = []
 
     model_config = {"from_attributes": True}
+
+class Token(BaseModel):
+    access_token: str
+    token_type: str = "bearer"
 
 
 #product model

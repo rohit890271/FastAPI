@@ -1,5 +1,15 @@
 from sqlalchemy.orm import Session
 import models, schemas
+from JWT_Token import hash_password
+
+def create_user(db, user):
+    hashed_pass = hash_password(user.password)
+    db_user = models.User(name=user.name, age=user.age, password=hashed_pass)
+    db.add(db_user)
+    db.commit()
+    db.refresh(db_user)
+    return db_user
+
 
 def get_users(db: Session):
     return db.query(models.User).all()
@@ -7,12 +17,12 @@ def get_users(db: Session):
 def get_user_by_id(db: Session, user_id: int):
     return db.query(models.User).filter(models.User.id == user_id).first()
 
-def create_user(db: Session, user: schemas.UserCreate):
-    new_user = models.User(name=user.name, age=user.age)
-    db.add(new_user)
-    db.commit()
-    db.refresh(new_user)
-    return new_user
+#def create_user(db: Session, user: schemas.UserCreate):
+   # new_user = models.User(name=user.name, age=user.age,password=user.password)
+  #  db.add(new_user)
+  #  db.commit()
+  #  db.refresh(new_user)
+  #  return new_user
 
 def update_user(db: Session, user_id: int, user_data: schemas.UserCreate):
     user = get_user_by_id(db, user_id)
